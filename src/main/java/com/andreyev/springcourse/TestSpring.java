@@ -7,9 +7,20 @@ public class TestSpring {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        TestBean testBean = context.getBean("testBean", TestBean.class);
+        MusicPlayer musicPlayer1 = context.getBean("musicPlayer", MusicPlayer.class);
+        MusicPlayer musicPlayer2 = context.getBean("musicPlayer", MusicPlayer.class);
 
-        System.out.println(testBean.getName());
+        boolean comparison = musicPlayer1 == musicPlayer2;
+
+        musicPlayer1.setVolume(10);
+        musicPlayer2.setVolume(80);
+
+        System.out.println("One Object? " + comparison);
+
+        System.out.println(musicPlayer1.getVolume());
+        System.out.println(musicPlayer2.getVolume());
+        //System.out.println(musicPlayer2.getName());
+
 
         context.close();
 

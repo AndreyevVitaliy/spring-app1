@@ -1,8 +1,9 @@
 package com.andreyev.springcourse;
 
-public class RockMusic implements Music{
+public class RapMusic implements Music{
     @Override
     public String getSong() {
-        return "Rock";
+        return "RAP";
     }
+
 }
