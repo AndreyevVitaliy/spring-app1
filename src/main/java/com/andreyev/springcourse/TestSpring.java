@@ -1,26 +1,46 @@
 package com.andreyev.springcourse;
 
+import com.andreyev.springcourse.enums.EnumMusicGanres;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import javax.sound.midi.Soundbank;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class TestSpring {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        MusicPlayer musicPlayer1 = context.getBean("musicPlayer", MusicPlayer.class);
-        MusicPlayer musicPlayer2 = context.getBean("musicPlayer", MusicPlayer.class);
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(MyConfig.class);
 
-        boolean comparison = musicPlayer1 == musicPlayer2;
+        Computer computer = context.getBean("computer", Computer.class);
 
-        musicPlayer1.setVolume(10);
-        musicPlayer2.setVolume(80);
+        Random random = new Random();
+        int tempValue = random.nextInt(2);
 
-        System.out.println("One Object? " + comparison);
+        switch (tempValue) {
+            case 0: computer.setGanreToMusicPlayer(EnumMusicGanres.ROCK);
+            break;
+            case 1: computer.setGanreToMusicPlayer(EnumMusicGanres.CLASSICAL);
+            break;
+        }
 
-        System.out.println(musicPlayer1.getVolume());
-        System.out.println(musicPlayer2.getVolume());
-        //System.out.println(musicPlayer2.getName());
+        System.out.println(computer);
 
+        //MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+
+//        Music classicalMusic = context.getBean("classicalMusic", Music.class);
+//        Music rapMusic = context.getBean("rapMusic", Music.class);
+//        Music rockMusic = context.getBean("rockMusic", Music.class);
+
+//        musicPlayer.addMusicToMusicList(classicalMusic);
+//        musicPlayer.addMusicToMusicList(rapMusic);
+//        musicPlayer.addMusicToMusicList(rockMusic);
+
+//        musicPlayer.playMusicList();
+
+        //musicPlayer.playMusic();
 
         context.close();
 
