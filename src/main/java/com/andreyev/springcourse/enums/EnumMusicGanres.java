@@ -1,5 +1,5 @@
 package com.andreyev.springcourse.enums;
 
 public enum EnumMusicGanres {
-    CLASSICAL, ROCK;
+    CLASSICAL, ROCK, RAP;
 }

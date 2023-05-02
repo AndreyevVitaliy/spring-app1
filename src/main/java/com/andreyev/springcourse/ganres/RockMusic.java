@@ -1,16 +1,19 @@
-package com.andreyev.springcourse;
+package com.andreyev.springcourse.ganres;
 
-import org.springframework.stereotype.Component;
+import com.andreyev.springcourse.interfaces.Music;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class RockMusic implements Music{
+public class RockMusic implements Music {
 
     private List<String> listOfSongs = new ArrayList<>();
 
-    public RockMusic() {
+    public static RockMusic getNewRockMusic() {
+        return new RockMusic();
+    }
+
+    private RockMusic() {
         listOfSongs.add("Рок песня 1");
         listOfSongs.add("Рок песня 2");
         listOfSongs.add("Рок песня 3");

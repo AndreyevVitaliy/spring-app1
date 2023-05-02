@@ -1,4 +1,4 @@
-package com.andreyev.springcourse;
+package com.andreyev.springcourse.interfaces;
 
 import java.util.List;
 

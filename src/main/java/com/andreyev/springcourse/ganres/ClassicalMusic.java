@@ -1,12 +1,15 @@
-package com.andreyev.springcourse;
+package com.andreyev.springcourse.ganres;
 
+import com.andreyev.springcourse.interfaces.Music;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ClassicalMusic implements Music{
+public class ClassicalMusic implements Music {
 
     private final List<String> listOfSongs = new ArrayList<>();
 
@@ -17,8 +20,8 @@ public class ClassicalMusic implements Music{
         listOfSongs.add("Классическая песня 3");
     }
 
-    public static ClassicalMusic getClassicalMusic() { //фабричный метод
-        System.out.println("factory_method");
+    public static ClassicalMusic getNewClassicalMusic() { //фабричный метод
+        //System.out.println("factory_method");
         return new ClassicalMusic();
     }
 
@@ -27,11 +30,13 @@ public class ClassicalMusic implements Music{
         return listOfSongs;
     }
 
-    public void doInitMethod(){
-        System.out.println("Init");
+    @PostConstruct
+    public void doInitMethod() {
+        //System.out.println("Init");
     }
 
-    public void doDestroyMethod(){
-        System.out.println("Destroy");
+    @PreDestroy
+    public void doDestroyMethod() {
+        //System.out.println("Destroy");
     }
 }

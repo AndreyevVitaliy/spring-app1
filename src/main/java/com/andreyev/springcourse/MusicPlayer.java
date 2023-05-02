@@ -1,30 +1,34 @@
 package com.andreyev.springcourse;
 
 import com.andreyev.springcourse.enums.EnumMusicGanres;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.andreyev.springcourse.interfaces.Music;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 import java.util.Random;
 
-@Component
+
 public class MusicPlayer {
-    private RockMusic rockMusic;
-    private ClassicalMusic classicalMusic;
+    private List<Music>listMusic;
+
     private EnumMusicGanres ganreMusic;
 
+    @Value("${musicPlayer.name}")
     private String name;
+    @Value("${musicPlayer.volume}")
     private int volume;
 
     //IoC
-    @Autowired
-    public MusicPlayer(RockMusic rockMusic, ClassicalMusic classicalMusic) {
-        this.rockMusic = rockMusic;
-        this.classicalMusic = classicalMusic;
+
+    public MusicPlayer(List<Music> listMusic) {
+        this.listMusic = listMusic;
     }
 
-    public MusicPlayer() {
+
+    public static MusicPlayer getNewMusicPlayer(List<Music> listMusic){
+        return new MusicPlayer(listMusic);
     }
+
 
     public void setGanreMusic(EnumMusicGanres ganreMusic) {
         this.ganreMusic = ganreMusic;
@@ -35,15 +39,20 @@ public class MusicPlayer {
     }
 
     public String playMusic(EnumMusicGanres ganres) {
+
+        Music tempMusic;
+
         switch (ganres){
             case ROCK:
-                return getRandomSong(rockMusic.getSong());
+                return getRandomSong(listMusic.get(0).getSong());
             case CLASSICAL:
-                return getRandomSong(classicalMusic.getSong());
+                return getRandomSong(listMusic.get(1).getSong());
+            case RAP:
+                return getRandomSong(listMusic.get(2).getSong());
             default:
-                return "выключен";
+                return "Out";
         }
-//        return "Playing: " + music.getSong();
+
     }
 
     private String getRandomSong(List<String> array){
@@ -54,6 +63,14 @@ public class MusicPlayer {
 
         return array.get(tempValue);
 
+    }
+
+    public List<Music> getListMusic() {
+        return listMusic;
+    }
+
+    public void setListMusic(List<Music> listMusic) {
+        this.listMusic = listMusic;
     }
 
 
